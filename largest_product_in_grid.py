@@ -28,6 +28,7 @@ horiz_multiple=1
 diag_multiple=1
 test_multiple=grid[0][0]*grid[0][1]*grid[0][2]*grid[0][3]
 
+#horizontal multiple tests
 for x in grid:
     for i in range(0,len(x)-3):
         a=x[i]
