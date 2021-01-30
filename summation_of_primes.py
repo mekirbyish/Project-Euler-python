@@ -1,8 +1,13 @@
+#technically will work, but will run for like a month
+
+#return 17
 #a=10
+
 a=2000000
 prime_numbers=[]
 sum=0
 i=2
+
 while i < a:
     print("i is",i)
     is_prime=True
