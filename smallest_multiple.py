@@ -1,7 +1,7 @@
-#max_numbers=10
 #smalles multiple is 2520
+#max_numbers=10
+
 max_numbers=20
-#smallest multiple will be 232792560
 integer=2
 number_list=[]
 prime_numbers=[]
