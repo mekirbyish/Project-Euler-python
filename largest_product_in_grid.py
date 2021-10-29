@@ -21,12 +21,20 @@ grid=[[8, 2, 22, 97, 38, 15, 00, 40, 00, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8]
 
 #find largest multiple of 4 consecutive digits in a single row
 #then largest of a single colum
-#then of diagonals
+#then of diagonals sloping down
+#then of diagonals sloping up
 
-vert_multiple=1
-horiz_multiple=1
-diag_multiple=1
-test_multiple=grid[0][0]*grid[0][1]*grid[0][2]*grid[0][3]
+horiz_test_multiple=grid[0][0]*grid[0][1]*grid[0][2]*grid[0][3]
+horiz_multiple=horiz_test_multiple
+
+vert_test_multiple=grid[0][0]*grid[1][0]*grid[2][0]*grid[3][0]
+vert_multiple=vert_test_multiple
+
+diag_neg_slope_test_multiple=grid[0][0]*grid[1][1]*grid[2][2]*grid[3][3]
+diag_neg_slope_multiple=diag_neg_slope_test_multiple
+
+diag_pos_slope_test_multiple=grid[19][19]*grid[18][18]*grid[17][17]*grid[16][16]
+diag_pos_slope_multiple=diag_pos_slope_test_multiple
 
 #horizontal multiple tests
 for x in grid:
@@ -35,8 +43,44 @@ for x in grid:
         b=x[i+1]
         c=x[i+2]
         d=x[i+3]
-        test_multiple=a*b*c*d
-        if test_multiple>horiz_multiple:
-            horiz_multiple=test_multiple
-print(horiz_multiple)
+        horiz_test_multiple=a*b*c*d
+        if horiz_test_multiple>horiz_multiple:
+            horiz_multiple=horiz_test_multiple
 
+#vertical multiple tests
+for j in range(0,len(grid)-3):
+    for i in range(0,len(grid[j])):
+        a=grid[j][i]
+        b=grid[j+1][i]
+        c=grid[j+2][i]
+        d=grid[j+3][i]
+        vert_test_multiple=a*b*c*d
+        if vert_test_multiple>vert_multiple:
+            vert_multiple=vert_test_multiple
+
+#diagonal negative slope multiple tests
+for j in range(0,len(grid)-3):
+    for i in range(0,len(grid[j])-3):
+        a=grid[j][i]
+        b=grid[j+1][i+1]
+        c=grid[j+2][i+2]
+        d=grid[j+3][i+3]
+        diag_neg_slope_test_multiple=a*b*c*d
+        if diag_neg_slope_test_multiple>diag_neg_slope_multiple:
+            diag_neg_slope_multiple=diag_neg_slope_test_multiple
+
+#diagonal positive slope multiple tests
+for j in range(0,len(grid)-3):
+    for i in range(0,len(grid[j])-3):
+        a=grid[j][i+3]
+        b=grid[j+1][i+2]
+        c=grid[j+2][i+1]
+        d=grid[j+3][i]
+        diag_pos_slope_test_multiple=a*b*c*d
+        if diag_pos_slope_test_multiple>diag_pos_slope_multiple:
+            diag_pos_slope_multiple=diag_pos_slope_test_multiple
+
+multiples=[horiz_multiple, vert_multiple, diag_pos_slope_multiple, diag_neg_slope_multiple]
+multiples.sort()
+multiples.reverse()
+print("Largest multiple is " + str(multiples[0]))
